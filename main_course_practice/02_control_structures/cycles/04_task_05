@@ -1,0 +1,76 @@
+Задача 5 — polling фоновой операции с timeout и несколькими причинами завершения
+
+API возвращает последовательные состояния фоновой задачи:
+
+responses = [
+    {"state": "processing", "request_time_ms": 450, "retry_after_ms": 700},
+    {"state": "processing", "request_time_ms": 600, "retry_after_ms": 900},
+    {"state": "processing", "request_time_ms": 800, "retry_after_ms": 1200},
+    {"state": "completed",  "request_time_ms": 500, "retry_after_ms": 0},
+    {"state": "failed",     "request_time_ms": 300, "retry_after_ms": 0},
+]
+
+Нужно реализовать polling с помощью while.
+
+Ограничения:
+
+max_attempts = 6
+timeout_ms = 5000
+
+Правила обработки:
+
+1. Ответы обрабатываются последовательно.
+
+2. Каждый реально обработанный response считается одной попыткой.
+
+3. В elapsed_time нужно учитывать:
+   - request_time_ms каждого реально обработанного ответа;
+   - retry_after_ms только тогда, когда после текущего ответа действительно будет выполняться следующая попытка.
+
+4. Возможные state:
+
+   "processing"
+   → операция ещё выполняется;
+   → можно перейти к следующей попытке, если остальные ограничения это позволяют.
+
+   "completed"
+   → немедленно завершить polling;
+   → result = "success".
+
+   "failed"
+   → немедленно завершить polling;
+   → result = "failed".
+
+5. Нельзя выполнять больше max_attempts попыток.
+
+6. Общий elapsed_time не должен превысить timeout_ms.
+
+Перед ожиданием retry_after_ms нужно проверить:
+
+   если добавление retry_after_ms приведёт к превышению timeout_ms,
+   следующую попытку выполнять нельзя.
+
+В этом случае:
+
+result = "timeout"
+
+7. Если после выполнения самого запроса request_time_ms общий elapsed_time уже стал больше timeout_ms:
+
+result = "timeout"
+
+8. Если ответы закончились раньше, чем получен "completed" или "failed":
+
+result = "responses_exhausted"
+
+После завершения вывести:
+
+print(f"attempts: {attempts}")
+print(f"elapsed_time: {elapsed_time}")
+print(f"final_state: {final_state}")
+print(f"result: {result}")
+
+final_state — state последнего реально обработанного ответа.
+
+Если ни одного ответа обработано не было:
+
+final_state = None
