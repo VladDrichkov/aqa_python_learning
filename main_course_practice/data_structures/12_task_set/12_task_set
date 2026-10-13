@@ -1,0 +1,58 @@
+Задача
+
+Есть набор тестов, которые запускались:
+
+all_tests = {
+    "login",
+    "payment",
+    "profile",
+    "search",
+    "orders",
+    "refund",
+}
+
+Есть тесты, которые упали:
+
+failed_tests = {
+    "payment",
+    "orders",
+    "refund",
+}
+
+Есть критичные тесты:
+
+critical_tests = {
+    "payment",
+    "login",
+    "refund",
+}
+
+Нужно:
+
+1. Пройти циклом по all_tests.
+
+2. Если тест не находится в failed_tests:
+   пропустить его через continue.
+
+3. Для оставшихся failed-тестов:
+   - если тест критичный, добавить его в critical_failures;
+   - иначе добавить его в regular_failures.
+
+4. После цикла проверить:
+
+   все ли critical_failures действительно входят в critical_tests.
+
+5. Вывести:
+
+critical_failures
+regular_failures
+is_valid_critical_group
+
+
+Условия:
+
+- critical_failures и regular_failures должны быть set;
+- обязательно используй continue;
+- обязательно используй проверку принадлежности через in / not in;
+- для финальной проверки выбери подходящую операцию set самостоятельно;
+- не используй comprehensions.

@@ -1,0 +1,60 @@
+Задача
+
+Есть результаты тестов в виде кортежей:
+
+test_results = (
+    ("login", 200, 180),
+    ("payment", 503, 920),
+    ("profile", 200, 410),
+    ("search", 404, 250),
+    ("orders", 500, 780),
+)
+
+Каждый внутренний tuple имеет структуру:
+
+(test_name, status, duration_ms)
+
+Нужно:
+
+1. Пройти по test_results циклом.
+
+2. Использовать unpacking, чтобы не обращаться к элементам через индексы.
+
+3. Пропускать тесты со status < 400 через continue.
+
+4. Для оставшихся тестов собрать список строк:
+
+   "test_name | status=STATUS | duration=DURATION"
+
+5. Отдельно с помощью list comprehension создать список имён тестов,
+   у которых duration_ms > 600.
+
+6. Найти первый тест со status >= 500:
+   - сохранить весь его tuple в переменную first_server_error;
+   - после нахождения прекратить поиск через break;
+   - если такого теста нет, оставить None.
+
+7. Затем распаковать first_server_error в три отдельные переменные:
+   server_error_name
+   server_error_status
+   server_error_duration
+
+   Делай это только если first_server_error не None.
+
+8. Выведи:
+
+   problem_tests
+   slow_tests
+   first_server_error
+   server_error_name
+   server_error_status
+   server_error_duration
+
+Ограничения:
+
+- обязательно используй tuple unpacking;
+- используй continue;
+- используй break;
+- используй list comprehension;
+- не превращай test_results в list;
+- не используй словари.

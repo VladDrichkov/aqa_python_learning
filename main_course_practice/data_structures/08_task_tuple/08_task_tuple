@@ -1,0 +1,68 @@
+Сложная задача на tuple
+
+Есть данные:
+
+test_results = (
+    ("login", 200, "passed"),
+    ("payment", 500, "failed"),
+    ("profile", 200, "passed"),
+    ("payment", 503, "failed"),
+    ("logout", 200, "passed"),
+)
+
+Каждый внутренний tuple имеет структуру:
+
+(test_name, status, result)
+
+Нужно:
+
+1. С помощью метода tuple.count() определить,
+   сколько раз в test_results встречается tuple:
+
+   ("payment", 500, "failed")
+
+2. С помощью метода tuple.index() найти индекс первого tuple:
+
+   ("payment", 503, "failed")
+
+3. Пройти по test_results с помощью enumerate() и tuple unpacking.
+
+4. Если result == "passed":
+   пропустить дальнейшую обработку через continue.
+
+5. Для failed-тестов собрать список строк:
+
+   "INDEX | test_name | status"
+
+   Индексация должна начинаться с 1.
+
+6. Найти первый failed-тест со status >= 500.
+   Сохранить весь tuple в first_server_error и остановить поиск через break.
+
+7. Для найденного first_server_error используй расширенную распаковку:
+
+   test_name, *error_info = first_server_error
+
+   В error_info должны попасть оставшиеся значения tuple.
+
+8. Выведи:
+
+   payment_500_count
+   payment_503_index
+   failed_tests
+   first_server_error
+   test_name
+   error_info
+
+
+Обязательно использовать:
+
+- tuple.count()
+- tuple.index()
+- tuple unpacking
+- расширенную распаковку *
+- enumerate()
+- continue
+- break
+
+Не превращай test_results в list.
