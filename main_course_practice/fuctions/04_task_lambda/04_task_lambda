@@ -1,0 +1,28 @@
+Есть результаты API-тестов:
+
+tests = [
+    {"name": "login", "status": "failed", "duration_ms": 420},
+    {"name": "profile", "status": "passed", "duration_ms": 180},
+    {"name": "payment", "status": "failed", "duration_ms": 730},
+    {"name": "logout", "status": "passed", "duration_ms": 95},
+    {"name": "cart", "status": "failed", "duration_ms": 420},
+]
+
+Нужно получить новый список строк только для failed-тестов.
+
+Формат результата:
+
+payment: 730 ms
+cart: 420 ms
+login: 420 ms
+
+Требования:
+
+1. Оставить только тесты со статусом "failed".
+2. Отсортировать их по duration_ms по убыванию.
+3. Если duration_ms одинаковая — сортировать по name по алфавиту.
+4. Преобразовать каждый элемент в строку формата:
+
+   name: N ms
+
+5. Использовать lambda хотя бы в одном месте.

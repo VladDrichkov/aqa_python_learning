@@ -1,0 +1,26 @@
+results = [
+    ("profile", "passed", 120),
+    ("payment", "failed", 450),
+    ("login", "failed", 300),
+    ("logout", "passed", 80),
+    ("cart", "failed", 450),
+]
+
+1. failed должны идти раньше passed
+
+2. среди failed:
+   большая duration должна идти раньше
+
+3. если status и duration одинаковые:
+   сортировка по имени по алфавиту
+
+4. среди passed применяются те же правила:
+   большая duration раньше,
+   затем имя
+
+   То есть ожидаемый порядок начинается примерно так:
+
+cart      failed 450
+payment   failed 450
+login     failed 300
+...
