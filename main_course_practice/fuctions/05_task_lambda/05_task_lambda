@@ -1,0 +1,30 @@
+Есть результаты UI-тестов:
+
+tests = [
+    {"name": "login", "status": "failed", "retries": 2, "duration_ms": 510},
+    {"name": "profile", "status": "passed", "retries": 0, "duration_ms": 220},
+    {"name": "payment", "status": "failed", "retries": 1, "duration_ms": 840},
+    {"name": "cart", "status": "failed", "retries": 3, "duration_ms": 840},
+    {"name": "logout", "status": "passed", "retries": 0, "duration_ms": 110},
+]
+
+Нужно получить список failed-тестов в таком порядке:
+
+1. Сначала тесты с большим количеством retries.
+2. Если retries одинаковые — тест с большей duration_ms должен идти раньше.
+3. Если retries и duration_ms одинаковые — сортировка по name по алфавиту.
+
+После сортировки преобразовать каждый тест в строку:
+
+name | retries=N | duration=M ms
+
+Например:
+
+cart | retries=3 | duration=840 ms
+
+Требования:
+
+- использовать lambda в key;
+- не писать отдельную функцию для сортировки;
+- фильтрацию и преобразование можешь реализовать любым уже изученным способом;
+- исходный список tests не изменять.
