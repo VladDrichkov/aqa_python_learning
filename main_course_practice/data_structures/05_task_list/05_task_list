@@ -1,0 +1,64 @@
+Сложная задача
+
+Есть данные двух прогонов тестов.
+
+suite_names = ["auth", "payments", "profile"]
+
+test_names = [
+    ["login", "logout", "refresh"],
+    ["create_payment", "refund"],
+    ["get_profile", "update_profile", "delete_profile"],
+]
+
+statuses = [
+    [200, 500, 200],
+    [201, 503],
+    [200, 400, 204],
+]
+
+Нужно обработать эти данные.
+
+1. Пройди по suites через enumerate().
+
+2. Для каждой suite получи:
+   - её имя из suite_names;
+   - список тестов из test_names;
+   - список статусов из statuses.
+
+3. Внутри suite объедини имена тестов и статусы через zip().
+
+4. Если status < 400:
+   - пропусти дальнейшую обработку этого теста через continue.
+
+5. Для всех оставшихся тестов собери строки формата:
+
+   "suite_index | suite_name | test_name | status"
+
+   suite_index должен начинаться с 1.
+
+6. Добавь эти строки в список problem_tests.
+
+7. После обработки всех suites создай через list comprehension отдельный список:
+
+   failed_suite_names
+
+   В него должны попасть только имена тех suites, в которых был хотя бы один status >= 400.
+
+8. Выведи:
+
+   problem_tests
+   failed_suite_names
+
+
+Обязательные элементы:
+
+- enumerate()
+- zip()
+- вложенный цикл
+- continue
+- list comprehension
+
+Не используй:
+- dict
+- set
+- готовые функции вроде any()
